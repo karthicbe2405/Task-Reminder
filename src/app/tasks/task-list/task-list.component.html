@@ -1,0 +1,47 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-xl-4">
+        <label for="assignedTo" style="font-weight: bold;">Select To View Particular User Tasks :  </label>
+    </div>
+    <div class="col-xl-4">
+        <select class="form-control" [(ngModel)]="assignedTo" name="assignedTo" id="assignedTo" placeholder="view task">
+            <option  value="" selected>All User Task</option>
+            <option  *ngFor="let user of users" [value]="user.email" >{{user.email}}</option>
+        </select>
+    </div>
+    <div class="col-xl-4">
+        <button [routerLink]="['new','task']" class="btn btn-outline-success">Create New Task</button>
+    </div>
+ </div>
+ <div class="row d-flex justify-content-center">
+     <div class="col-xl-12">
+        <ng-container *ngFor="let task of tasks;let i = index">
+        <a 
+        style="cursor: pointer; text-decoration: none; padding: 5px;"
+        [routerLink]="[i,'task']"
+        routerLinkActive="active"
+        *ngIf="assignedTo == '' || task.assignedTo == assignedTo">
+            <div class="row" >
+                <div class="col xl-8">
+                    <div class="card">
+                        <div class="card-header" style="background-color: rgb(59, 58, 58); color: white;">{{task.title}}</div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card-body" style="color: black;">
+                                    <h5 class="card-title">{{task.description}}</h5>
+                                    <p class="card-text">Date : {{task.reminderTime}}</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card-body" style="color: black;">
+                                    <p class="card-text">By : {{task.createdBy}}</p>
+                                    <p class="card-text">To : {{task.assignedTo}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        </ng-container>
+    </div>
+</div>

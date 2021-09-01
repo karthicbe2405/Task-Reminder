@@ -1,0 +1,51 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-xl-8">
+      <h2 style="text-align: center;">{{editMode ? 'Task Update' : 'New Task'}}</h2>
+        <form [formGroup]="taskForm" (ngSubmit)="onSubmit()"  #form>
+ 
+            <div class="form-group">
+              <label for="title" style="font-weight: bold;">Title</label>
+              <input type="text" formControlName="title" class="form-control" id="title"  [ngClass]="{'is-invalid' : !taskForm.get('title').valid && taskForm.get('title').touched}" aria-describedby="emailHelp" placeholder="Enter Task Title" autocomplete="off">
+              <span *ngIf="!taskForm.get('title').valid && taskForm.get('title').touched" class="help-block">Please enter title</span>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+              <label for="description" style="font-weight: bold;">Description</label>
+              <input type="text" formControlName="description" [ngClass]="{'is-invalid' : !taskForm.get('description').valid && taskForm.get('description').touched}" class="form-control" id="description" placeholder="Enter Description" autocomplete="off">
+              <span *ngIf="!taskForm.get('description').valid && taskForm.get('description').touched" class="help-block">Please enter Description</span>
+            </div>
+ 
+            <br>
+
+            <div class="form-group">
+              <label for="meeting-time" style="font-weight: bold;">Task Reminder Time : .</label>
+              <input type="datetime-local" formControlName="reminderTime" id="meeting-time" name="meeting-time" autocomplete="off">
+            </div>
+            
+            <br>
+            <div class="form-group">
+                <label for="assignedBy" style="font-weight: bold;">Created By : </label>
+                <input class="form-control" type="text" placeholder="{{editMode == true ? task.createdBy : activeUser.email }}" readonly>
+            </div>
+ 
+            <br>
+
+            <label for="assignedTo" style="font-weight: bold;">Assign To : {{task ? task.assignedTo : ''}}</label>
+            <select class="form-control" formControlName = "assignedTo" name="assignedTo" id="assignedTo" [ngClass]="{'is-invalid' : !taskForm.get('assignedTo').valid && taskForm.get('assignedTo').touched}">
+                <option  *ngFor="let user of users" [value]="user.email" >{{user.email}}</option>
+            </select>
+            <span *ngIf="!taskForm.get('assignedTo').valid && taskForm.get('assignedTo').touched" class="help-block">Please select the User </span>
+ 
+            <hr>
+ 
+            <button [disabled]="taskForm.invalid" type="submit"  class="btn btn-success">{{ editMode ? 'Update' : 'Add' }}</button> &nbsp;
+ 
+            <button  type="button" class="btn btn-warning" (click)="onCancel()">Cancel</button>&nbsp;
+ 
+            <button  *ngIf="editMode" type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
+ 
+          </form>
+    </div>
+</div>
