@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row d-flex justify-content-center" style="margin-top: 5px;" *ngFor="let notification of notifications">
+        <div class="col-xl-8">
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">{{notification.text}}</h4>
+                <hr>
+                <p>Reminder Time : {{notification.timeCreated}}</p>
+              </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Task } from '../models/task.model';
+import { Notification } from '../models/notification.model';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,29 +15,29 @@ export class TaskService {
     title : "Task1",
     description : "First Try",
     reminderTime : "2019-12-31T18:30:00Z",
-    createdBy : "utkarsh.patel@maximl.com",
-    assignedTo : "sakshee.jain@maximl.com"
+    createdBy : "aravind@maximl.com",
+    assignedTo : "lakshman@maximl.com"
   },
   {
     title : "Task2",
-    description : "First Try",
+    description : "Second Try",
     reminderTime : "2019-12-31T18:30:00Z",
-    createdBy : "utkarsh.patel@maximl.com",
-    assignedTo : "sakshee.jain@maximl.com"
+    createdBy : "hari@maximl.com",
+    assignedTo : "kumar@maximl.com"
   },
   { 
     title : "Task3",
-    description : "First Try",
+    description : "Third Try",
     reminderTime : "2019-12-31T18:30:00Z",
-    createdBy : "utkarsh.patel@maximl.com",
-    assignedTo : "hari@maximl.com"
+    createdBy : "kumar@maximl.com",
+    assignedTo : "aravind@maximl.com"
   },
   {
     title : "Task4",
     description : "First Try",
     reminderTime : "2019-12-31T18:30:00Z",
-    createdBy : "utkarsh.patel@maximl.com",
-    assignedTo : "sakshee.jain@maximl.com"
+    createdBy : "lakshman@maximl.com",
+    assignedTo : "hari@maximl.com"
   }
 ];
 
@@ -65,6 +67,20 @@ export class TaskService {
 
   taskUpdated(){
     this.taskUpdate.next(this.tasks);
+  }
+
+  getUserTaksNotifications(userEmail : string){
+    let notifications : Notification[] = this.tasks.filter( (task) => {
+        if( userEmail === task.assignedTo)
+          return true;
+        return false;
+    }).map( (task) => {
+        return {
+          text : task.title + ' ' + task.description,
+          timeCreated : task.reminderTime
+        };
+    });
+    return notifications;
   }
 
 }
