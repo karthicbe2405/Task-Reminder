@@ -1,29 +1,32 @@
 <div class="row d-flex justify-content-center">
     
-    <div class="col-xl-4">
-        <h3 style="text-align: center;">{{loginMode ? 'Login' : 'Signup'}}</h3>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="col-xl-4">
+      <h3 style="text-align: center;">{{loginMode ? 'Login' : 'Signup'}}</h3>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-            <div class="form-group" *ngIf="!loginMode">
-              <label for="userName">UserName</label>
-              <input type="text" formControlName="username" class="form-control" id="userName" placeholder="Enter Username">
-            </div>
+          <div class="form-group" *ngIf="!loginMode">
+            <label for="userName">UserName</label>
+            <input type="text" formControlName="username" class="form-control" id="userName" placeholder="Enter Username" [ngClass]="{'is-invalid' : !loginForm.get('username').valid && loginForm.get('username').touched}">
+            <span *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched" class="help-block">Please enter Username</span>
+          </div>
 
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter Email">
-            </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter Email" [ngClass]="{'is-invalid' : !loginForm.get('email').valid && loginForm.get('email').touched}">
+            <span *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched" class="help-block">Please enter Email</span>
+          </div>
 
-            <div class="form-group">
-              <label for="passowrd">Password</label>
-              <input type="text" formControlName="password" class="form-control" id="passowrd" placeholder="Enter Password">
-            </div>
+          <div class="form-group">
+            <label for="passowrd">Password</label>
+            <input type="text" formControlName="password" class="form-control" id="passowrd" placeholder="Enter Password" [ngClass]="{'is-invalid' : !loginForm.get('password').valid && loginForm.get('password').touched}">
+            <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched" class="help-block">Please enter password</span>
+          </div>
 
-            <hr>
+          <hr>
 
-            <button type="submit" class="btn btn-success">{{ loginMode ? 'Login' : 'SignUp' }}</button> &nbsp;
-            <button type="button" class="btn btn-info" (click)="switch()">{{ loginMode ? 'Switch to SignUp' : 'Switch to Login'}}</button>
+          <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">{{ loginMode ? 'Login' : 'SignUp' }}</button> &nbsp;
+          <button type="button" class="btn btn-info" (click)="switch()" >{{ loginMode ? 'Switch to SignUp' : 'Switch to Login'}}</button>
 
-          </form>
-    </div>
+        </form>
+  </div>
 </div>
