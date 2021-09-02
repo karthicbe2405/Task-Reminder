@@ -5,7 +5,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { NotificationComponent } from './notification/notification.component';
 
 const routes: Routes = [
-  {path:'',redirectTo: './tasks', pathMatch: 'full'},
+  {path:'',redirectTo: 'auth', pathMatch: 'full'},
   {path:'auth',component:AuthComponent},
   {path:'notification',component:NotificationComponent, canActivate : [AuthGuard]}
 ];
