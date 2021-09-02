@@ -12,8 +12,8 @@ import {User} from 'src/app/models/user.model'
 })
 export class TaskListComponent implements OnInit, OnDestroy {
 
-  tasks !: Task[];
-  users !: User[];
+  tasks : Task[];
+  users : User[];
 
   assignedTo : String = '';
 
@@ -25,9 +25,10 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
     this.tasks = this.taskService.getTasks();
 
-    this.subscription = this.taskService.taskUpdate.subscribe( (tasks : Task[]) =>{
-      this.tasks = tasks;
-    });
+    this.subscription = this.taskService.taskUpdate
+      .subscribe( (tasks : Task[]) =>{
+        this.tasks = tasks;
+      });
 
     this.users = this.userService.getUsers();
 

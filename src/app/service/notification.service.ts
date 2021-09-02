@@ -18,16 +18,18 @@ export class NotificationService {
 
   constructor(private store : Store<AppState>,private taskService : TaskService) { 
 
-    this.store.select('auth').subscribe( (state) => {
+    this.store.select('auth')
+      .subscribe( (state) => {
         if(state.user){
           this.activeUser = state.user;
           this.updateNotifications();
         }
-    });
-
-    this.taskService.taskUpdate.subscribe((status) => {
-      this.updateNotifications();
-    });
+      });
+      
+    this.taskService.taskUpdate
+      .subscribe((status) => {
+        this.updateNotifications();
+      });
 
   }
 
@@ -41,7 +43,6 @@ export class NotificationService {
   getNotifications(){
     return this.notifications.slice();
   }
-  
       
 }
 

@@ -38,15 +38,12 @@ export class UserService {
 ];
 
   getUsers(){
-
     return this.users.slice();
-
   }
 
   login(userInput : {email : string,password : string}){
 
     let loginStatus : boolean =  false;
-
     this.users.forEach((user) => {
       if(user.email === userInput.email && userInput.password === "123"){
           this.store.dispatch(new AuthActions.Login(user));
@@ -54,7 +51,6 @@ export class UserService {
           loginStatus=true;
       }
     });
-
     return loginStatus;
   }
 

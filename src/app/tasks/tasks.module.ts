@@ -12,7 +12,6 @@ import { FilterTaskPipe } from '../pipes/filter-task.pipe';
 const route : Routes = [
   {path:'tasks',component:TasksComponent, canActivate : [AuthGuard],
     children : [
-      // {path:'',component:TaskListComponent},
       {path:'new/task',component:TaskDetailComponent},
       {path:':id/task',component:TaskDetailComponent}
     ]
@@ -31,7 +30,6 @@ const route : Routes = [
     RouterModule.forChild(route)
   ],
   exports:[
-    RouterModule,
     TasksComponent,
     TaskListComponent,
     TaskDetailComponent

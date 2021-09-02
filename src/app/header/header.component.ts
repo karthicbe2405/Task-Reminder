@@ -18,15 +18,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private store : Store<AppState>,private router:Router) { }
 
   ngOnInit(): void {
-    this.subscripton = this.store.select('auth').subscribe( (state) => {
-      
-      if(state.user){
+    this.subscripton = this.store.select('auth')
+    .subscribe( (state) => {  
+      if(state.user)
         this.loggedIn = true;
-      }
-      else{
+      else
         this.loggedIn = false;
-      }
-
     });
   }
 

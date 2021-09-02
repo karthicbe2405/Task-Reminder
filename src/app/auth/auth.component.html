@@ -18,7 +18,7 @@
 
           <div class="form-group">
             <label for="passowrd">Password</label>
-            <input type="text" formControlName="password" class="form-control" id="passowrd" placeholder="Enter Password" [ngClass]="{'is-invalid' : !loginForm.get('password').valid && loginForm.get('password').touched}">
+            <input type="text" formControlName="password" class="form-control" id="passowrd" placeholder="Enter Password 123 only 123 gives succesfull login" [ngClass]="{'is-invalid' : !loginForm.get('password').valid && loginForm.get('password').touched}">
             <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched" class="help-block">Please enter password</span>
           </div>
 

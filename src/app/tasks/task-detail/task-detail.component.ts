@@ -17,25 +17,31 @@ import { AppState } from 'src/app/store/app.reducer';
 export class TaskDetailComponent implements OnInit {
 
   editMode : Boolean = false;
-  taskId !: number;
-  task !: Task;
-  taskForm !: FormGroup;
-  users !: User[];
+  taskId : number;
+  task : Task;
+  taskForm : FormGroup;
+  users : User[];
   activeUser : User;
 
-  constructor(private route: ActivatedRoute,private router: Router,private taskService : TaskService, private userService : UserService,private store : Store<AppState>) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private taskService : TaskService,
+    private userService : UserService,
+    private store : Store<AppState>) { }
 
   ngOnInit(): void {
 
-    this.route.params.subscribe((params : Params) => {
+    this.route.params
+      .subscribe((params : Params) => {
         this.taskId = +params['id'];
         this.editMode = params['id'] != null;
         this.initForm();
-    });
+      });
 
-    this.store.select('auth').subscribe( (state) => {
+    this.store.select('auth')
+      .subscribe( (state) => {
         this.activeUser = state.user;
-    });
+      });
 
     this.users = this.userService.getUsers();
   }
@@ -47,8 +53,6 @@ export class TaskDetailComponent implements OnInit {
     let reminderTime = moment(new Date()).format('YYYY-MM-DDTHH:mm') ;
     let createdBy = '';
     let assignedTo = '';
-
-    console.log(reminderTime);
 
     if (this.editMode) {
 
@@ -71,7 +75,8 @@ export class TaskDetailComponent implements OnInit {
   }
 
   onSubmit(){
-    this.taskForm.value.reminderTime=new Date(this.taskForm.value['reminderTime']).toISOString();
+    this.taskForm.value.reminderTime = new Date(this.taskForm.value['reminderTime']).toISOString();
+
     if(this.editMode && confirm('Are You Sure You want to Update this Task ? ')){
       this.taskService.updateTask(this.taskId,this.taskForm.value);
       this.formCompleted('Task Updated');
@@ -80,8 +85,7 @@ export class TaskDetailComponent implements OnInit {
       this.taskForm.value.createdBy=this.activeUser.email;
       this.taskService.addTask(this.taskForm.value);
       this.formCompleted('Task Added');
-    }
-    
+    } 
   }
 
   onDelete(){

@@ -11,7 +11,8 @@ import { NotificationService } from '../service/notification.service';
 export class NotificationComponent implements OnInit, OnDestroy {
 
   notifications : Notification[];
-  notificationSubscription : Subscription
+  notificationSubscription : Subscription;
+
   constructor(private notificationService : NotificationService) { }
 
   ngOnInit(): void {
@@ -19,9 +20,10 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.notifications = this.notificationService.getNotifications();
 
     this.notificationSubscription = this.notificationService.notificationUpdate
-                                    .subscribe( (notification : Notification[]) => {
-                                            this.notifications = notification;
-                                    } );
+      .subscribe( (notification : Notification[]) => {
+        this.notifications = notification;
+      } 
+    );
   }
 
   ngOnDestroy(){
